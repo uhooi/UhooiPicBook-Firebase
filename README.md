@@ -44,5 +44,6 @@ Run `npm test` .
 
 - https://firebase.google.com/docs/cli/
 - https://firebase.google.com/docs/firestore/security/test-rules-emulator
+- https://firebase.google.com/docs/firestore/security/rules-structure#recursive_wildcards
 - https://github.com/firebase/quickstart-nodejs/tree/master/firestore-emulator/typescript-quickstart
 - https://github.com/mogaming217/youtube-simple-todo-sample
