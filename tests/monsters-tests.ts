@@ -8,6 +8,15 @@ type Auth = {
   [key: string]: any
 }
 
+type Monster = {
+  name: string,
+  description: string,
+  base_color: string,
+  icon_url: string,
+  dancing_url: string,
+  order: number
+}
+
 //#endregion
 
 //#region Consts
@@ -44,37 +53,25 @@ describe('/monsters', () => {
   describe('create', () => {
     it('can not create', async () => {
       const db = authedApp(null)
+      const monster = createTestMonster()
 
-      await firebase.assertFails(db.collection('monsters').doc('uhooi').set({
-        name: 'uhooi',
-        description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
-        base_color: '#FFFFFF',
-        icon_url: 'https://example.com/example.png',
-        dancing_url: 'https://example.com/example.gif',
-        order: 1
-      }))
+      await firebase.assertFails(db.collection('monsters').doc('uhooi').set(monster))
     })
   })
 
   describe('update', () => {
     it('can not update', async () => {
-      createTestData('monsters', 'uhooi')
+      await configureTestData('monsters', 'uhooi')
       const db = authedApp(null)
+      const monster = createTestMonster()
 
-      await firebase.assertFails(db.collection('monsters').doc('uhooi').set({
-        name: 'uhooi',
-        description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
-        base_color: '#FFFFFF',
-        icon_url: 'https://example.com/example.png',
-        dancing_url: 'https://example.com/example.gif',
-        order: 1
-      }))
+      await firebase.assertFails(db.collection('monsters').doc('uhooi').set(monster))
     })
   })
 
   describe('delete', () => {
     it('can not delete', async () => {
-      createTestData('monsters', 'uhooi')
+      await configureTestData('monsters', 'uhooi')
       const db = authedApp(null)
 
       await firebase.assertFails(db.collection('monsters').doc('uhooi').delete())
@@ -83,7 +80,7 @@ describe('/monsters', () => {
 
   describe('get', () => {
     it('can not get', async () => {
-      createTestData('monsters', 'uhooi')
+      await configureTestData('monsters', 'uhooi')
       const db = authedApp(null)
 
       await firebase.assertFails(db.collection('monsters').doc('uhooi').get())
@@ -92,7 +89,7 @@ describe('/monsters', () => {
   
   describe('list', () => {
     it('can get list', async () => {
-      createTestData('monsters', 'uhooi')
+      await configureTestData('monsters', 'uhooi')
       const db = authedApp(null)
 
       await firebase.assertSucceeds(db.collection('monsters').get())
@@ -102,39 +99,27 @@ describe('/monsters', () => {
   describe('/document/subcollection', () => {
     describe('create', () => {
       it('can not create', async () => {
-        createTestData('monsters', 'document')
+        await configureTestData('monsters', 'document')
         const db = authedApp(null)
+        const monster = createTestMonster()
   
-        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').set({
-          name: 'uhooi',
-          description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
-          base_color: '#FFFFFF',
-          icon_url: 'https://example.com/example.png',
-          dancing_url: 'https://example.com/example.gif',
-          order: 1
-        }))
+        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').set(monster))
       })
     })
   
     describe('update', () => {
       it('can not update', async () => {
-        createSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
+        await configureSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
         const db = authedApp(null)
+        const monster = createTestMonster()
   
-        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').set({
-          name: 'uhooi',
-          description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
-          base_color: '#FFFFFF',
-          icon_url: 'https://example.com/example.png',
-          dancing_url: 'https://example.com/example.gif',
-          order: 1
-        }))
+        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').set(monster))
       })
     })
   
     describe('delete', () => {
       it('can not delete', async () => {
-        createSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
+        await configureSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
         const db = authedApp(null)
   
         await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').delete())
@@ -143,7 +128,7 @@ describe('/monsters', () => {
   
     describe('get', () => {
       it('can not get', async () => {
-        createSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
+        await configureSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
         const db = authedApp(null)
   
         await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').get())
@@ -152,7 +137,7 @@ describe('/monsters', () => {
     
     describe('list', () => {
       it('can not get list', async () => {
-        createSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
+        await configureSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
         const db = authedApp(null)
   
         await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').get())
@@ -165,37 +150,25 @@ describe('/others', () => {
   describe('create', () => {
     it('can not create', async () => {
       const db = authedApp(null)
+      const monster = createTestMonster()
 
-      await firebase.assertFails(db.collection('others').doc('uhooi').set({
-        name: 'uhooi',
-        description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
-        base_color: '#FFFFFF',
-        icon_url: 'https://example.com/example.png',
-        dancing_url: 'https://example.com/example.gif',
-        order: 1
-      }))
+      await firebase.assertFails(db.collection('others').doc('uhooi').set(monster))
     })
   })
 
   describe('update', () => {
     it('can not update', async () => {
-      createTestData('others', 'uhooi')
+      await configureTestData('others', 'uhooi')
       const db = authedApp(null)
+      const monster = createTestMonster()
 
-      await firebase.assertFails(db.collection('others').doc('uhooi').set({
-        name: 'uhooi',
-        description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
-        base_color: '#FFFFFF',
-        icon_url: 'https://example.com/example.png',
-        dancing_url: 'https://example.com/example.gif',
-        order: 1
-      }))
+      await firebase.assertFails(db.collection('others').doc('uhooi').set(monster))
     })
   })
 
   describe('delete', () => {
     it('can not delete', async () => {
-      createTestData('others', 'uhooi')
+      await configureTestData('others', 'uhooi')
       const db = authedApp(null)
 
       await firebase.assertFails(db.collection('others').doc('uhooi').delete())
@@ -204,7 +177,7 @@ describe('/others', () => {
 
   describe('get', () => {
     it('can not get', async () => {
-      createTestData('others', 'uhooi')
+      await configureTestData('others', 'uhooi')
       const db = authedApp(null)
 
       await firebase.assertFails(db.collection('others').doc('uhooi').get())
@@ -213,7 +186,7 @@ describe('/others', () => {
   
   describe('list', () => {
     it('can not get list', async () => {
-      createTestData('others', 'uhooi')
+      await configureTestData('others', 'uhooi')
       const db = authedApp(null)
 
       await firebase.assertFails(db.collection('others').get())
@@ -225,30 +198,27 @@ describe('/others', () => {
 
 //#region Other Methods
 
-function createTestData(collectionId: string, documentId: string) {
+function configureTestData(collectionId: string, documentId: string) {
   const db = adminApp
 
-  db.collection(collectionId).doc(documentId).set({
-    name: 'uhooi',
-    description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
-    base_color: '#FFFFFF',
-    icon_url: 'https://example.com/example.png',
-    dancing_url: 'https://example.com/example.gif',
-    order: 1
-  })
+  db.collection(collectionId).doc(documentId).set(createTestMonster())
 }
 
-function createSubCollectionTestData(collectionId: string, documentId: string, subCollectionId: string, subDocumentId: string) {
+function configureSubCollectionTestData(collectionId: string, documentId: string, subCollectionId: string, subDocumentId: string) {
   const db = adminApp
 
-  db.collection(collectionId).doc(documentId).collection(subCollectionId).doc(subDocumentId).set({
+  db.collection(collectionId).doc(documentId).collection(subCollectionId).doc(subDocumentId).set(createTestMonster())
+}
+
+function createTestMonster(): Monster {
+  return {
     name: 'uhooi',
     description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
     base_color: '#FFFFFF',
     icon_url: 'https://example.com/example.png',
     dancing_url: 'https://example.com/example.gif',
     order: 1
-  })
+  }
 }
 
 //#endregion
