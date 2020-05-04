@@ -98,6 +98,67 @@ describe('/monsters', () => {
       await firebase.assertSucceeds(db.collection('monsters').get())
     })
   })
+
+  describe('/document/subcollection', () => {
+    describe('create', () => {
+      it('can not create', async () => {
+        createTestData('monsters', 'document')
+        const db = authedApp(null)
+  
+        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').set({
+          name: 'uhooi',
+          description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
+          base_color: '#FFFFFF',
+          icon_url: 'https://example.com/example.png',
+          dancing_url: 'https://example.com/example.gif',
+          order: 1
+        }))
+      })
+    })
+  
+    describe('update', () => {
+      it('can not update', async () => {
+        createSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
+        const db = authedApp(null)
+  
+        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').set({
+          name: 'uhooi',
+          description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
+          base_color: '#FFFFFF',
+          icon_url: 'https://example.com/example.png',
+          dancing_url: 'https://example.com/example.gif',
+          order: 1
+        }))
+      })
+    })
+  
+    describe('delete', () => {
+      it('can not delete', async () => {
+        createSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
+        const db = authedApp(null)
+  
+        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').delete())
+      })
+    })
+  
+    describe('get', () => {
+      it('can not get', async () => {
+        createSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
+        const db = authedApp(null)
+  
+        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').get())
+      })
+    })
+    
+    describe('list', () => {
+      it('can not get list', async () => {
+        createSubCollectionTestData('monsters', 'document', 'subcollection', 'uhooi')
+        const db = authedApp(null)
+  
+        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').get())
+      })
+    })
+  })
 })
 
 describe('/others', () => {
@@ -168,6 +229,19 @@ function createTestData(collectionId: string, documentId: string) {
   const db = adminApp
 
   db.collection(collectionId).doc(documentId).set({
+    name: 'uhooi',
+    description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
+    base_color: '#FFFFFF',
+    icon_url: 'https://example.com/example.png',
+    dancing_url: 'https://example.com/example.gif',
+    order: 1
+  })
+}
+
+function createSubCollectionTestData(collectionId: string, documentId: string, subCollectionId: string, subDocumentId: string) {
+  const db = adminApp
+
+  db.collection(collectionId).doc(documentId).collection(subCollectionId).doc(subDocumentId).set({
     name: 'uhooi',
     description: 'ゆかいな　みどりの　せいぶつ。\nわるそうに　みえるが　むがい。',
     base_color: '#FFFFFF',
