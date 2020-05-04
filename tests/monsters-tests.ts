@@ -72,6 +72,15 @@ describe('/monsters', () => {
     })
   })
 
+  describe('delete', () => {
+    it('can not delete', async () => {
+      createTestData('monsters', 'uhooi')
+      const db = authedApp(null)
+
+      await firebase.assertFails(db.collection('monsters').doc('uhooi').delete())
+    })
+  })
+
   describe('get', () => {
     it('can not get', async () => {
       createTestData('monsters', 'uhooi')
@@ -120,6 +129,15 @@ describe('/others', () => {
         dancing_url: 'https://example.com/example.gif',
         order: 1
       }))
+    })
+  })
+
+  describe('delete', () => {
+    it('can not delete', async () => {
+      createTestData('others', 'uhooi')
+      const db = authedApp(null)
+
+      await firebase.assertFails(db.collection('others').doc('uhooi').delete())
     })
   })
 
