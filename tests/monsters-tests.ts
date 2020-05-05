@@ -201,13 +201,13 @@ describe('/others', () => {
 function configureTestData(collectionId: string, documentId: string) {
   const db = adminApp
 
-  db.collection(collectionId).doc(documentId).set(createTestMonster())
+  return db.collection(collectionId).doc(documentId).set(createTestMonster())
 }
 
 function configureSubCollectionTestData(collectionId: string, documentId: string, subCollectionId: string, subDocumentId: string) {
   const db = adminApp
 
-  db.collection(collectionId).doc(documentId).collection(subCollectionId).doc(subDocumentId).set(createTestMonster())
+return db.collection(collectionId).doc(documentId).collection(subCollectionId).doc(subDocumentId).set(createTestMonster())
 }
 
 function createTestMonster(): Monster {
