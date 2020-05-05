@@ -207,7 +207,7 @@ function configureTestData(collectionId: string, documentId: string) {
 function configureSubCollectionTestData(collectionId: string, documentId: string, subCollectionId: string, subDocumentId: string) {
   const db = adminApp
 
-return db.collection(collectionId).doc(documentId).collection(subCollectionId).doc(subDocumentId).set(createTestMonster())
+  return db.collection(collectionId).doc(documentId).collection(subCollectionId).doc(subDocumentId).set(createTestMonster())
 }
 
 function createTestMonster(): Monster {
