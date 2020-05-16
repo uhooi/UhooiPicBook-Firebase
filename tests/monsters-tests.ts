@@ -65,7 +65,7 @@ describe('/monsters', () => {
       const db = authedApp(null)
       const monster = createTestMonster()
 
-      await firebase.assertFails(db.collection('monsters').doc('uhooi').set(monster))
+      await firebase.assertFails(db.collection('monsters').doc('uhooi').update(monster))
     })
   })
 
@@ -113,7 +113,7 @@ describe('/monsters', () => {
         const db = authedApp(null)
         const monster = createTestMonster()
   
-        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').set(monster))
+        await firebase.assertFails(db.collection('monsters').doc('document').collection('subcollection').doc('uhooi').update(monster))
       })
     })
   
@@ -162,7 +162,7 @@ describe('/others', () => {
       const db = authedApp(null)
       const monster = createTestMonster()
 
-      await firebase.assertFails(db.collection('others').doc('uhooi').set(monster))
+      await firebase.assertFails(db.collection('others').doc('uhooi').update(monster))
     })
   })
 
