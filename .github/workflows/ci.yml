@@ -4,9 +4,18 @@ on:
   push:
     branches:
       - master
-      - releases/**
       - develop
-      - feature/**
+    paths-ignore:
+      - docs/**
+      - README.md
+      - LICENSE
+  pull_request:
+    branches:
+      - develop
+    paths-ignore:
+      - docs/**
+      - README.md
+      - LICENSE
 
 jobs:
   test:
@@ -23,6 +32,25 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    
+    # npmで管理しているライブラリのキャッシュ復元
+    - uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    
+    # Firebase CLIのインストール
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
+    
+    # エミュレータのインストール
+    - name: Install the emulator
+      run: firebase setup:emulators:firestore
+    
+    # npmで管理しているライブラリのインストール
+    - run: npm install
 
     # テスト
     - run: npm test

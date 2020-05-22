@@ -1,5 +1,9 @@
 # UhooiPicBook-Firebase
 
+[![](https://github.com/uhooi/UhooiPicBook-Firebase/workflows/CI/badge.svg)](https://github.com/uhooi/UhooiPicBook-Firebase/actions?query=workflow%3ACI)
+[![License](https://img.shields.io/github/license/uhooi/UhooiPicBook-Firebase)](https://github.com/uhooi/UhooiPicBook-Firebase/blob/master/LICENSE)
+[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fthe_uhooi)](https://twitter.com/the_uhooi)
+
 ![logo](./docs/logo.png)
 
 Testing Firestore security rules for Uhooi's character book.
