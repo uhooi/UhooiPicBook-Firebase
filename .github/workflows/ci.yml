@@ -20,9 +20,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    env:
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      FIREBASE_DATABASE_EMULATOR_HOST: localhost:9000
+      FIRESTORE_EMULATOR_HOST: localhost:8080
+
     strategy:
       matrix:
         node-version: [10.x, 12.x]
+
     steps:
     # チェックアウト
     - uses: actions/checkout@v2
