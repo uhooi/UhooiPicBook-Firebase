@@ -1,4 +1,4 @@
-import * as firebase from '@firebase/testing'
+import * as firebase from '@firebase/rules-unit-testing'
 import * as fs from 'fs'
 
 //#region Types
@@ -25,7 +25,7 @@ const projectId = 'uhooipicbook'
 const databaseName = 'uhooipicbook'
 const rules = fs.readFileSync('./firestore.rules', 'utf8')
 const authedApp = (auth?: Auth) => firebase.initializeTestApp({ projectId: projectId, databaseName, auth }).firestore()
-const adminApp =firebase.initializeAdminApp({ projectId: projectId, databaseName }).firestore()
+const adminApp = firebase.initializeAdminApp({ projectId: projectId, databaseName }).firestore()
 const coverageUrl = `http://localhost:8080/emulator/v1/projects/${projectId}:ruleCoverage.html`
 
 //#endregion
