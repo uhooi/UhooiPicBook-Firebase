@@ -42,7 +42,21 @@ $ npm install
 
 ## Testing
 
-Run `npm test` .
+1. Run firebase login to authenticate the CLI.
+
+```
+$ firebase login:ci
+$ export FIREBASE_TOKEN={generated Firebase token}
+```
+
+2. Export envirionment variables.
+
+```
+$ export FIREBASE_DATABASE_EMULATOR_HOST=localhost:9000
+$ export FIRESTORE_EMULATOR_HOST=localhost:8080
+```
+
+3. Run `npm test` .
 
 ## References
 
