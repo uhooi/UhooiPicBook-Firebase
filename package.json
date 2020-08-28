@@ -4,7 +4,7 @@
   "description": "Cloud Firestore emulator testing, with TypeScript",
   "dependencies": {},
   "devDependencies": {
-    "@firebase/rules-unit-testing": "^1.0.0",
+    "@firebase/rules-unit-testing": "^1.0.1",
     "@types/jest": "^25.2.1",
     "firebase-admin": "^9.1.1",
     "jest": "^25.5.3",
