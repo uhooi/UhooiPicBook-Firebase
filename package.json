@@ -6,7 +6,7 @@
   "devDependencies": {
     "@firebase/rules-unit-testing": "^1.0.1",
     "@types/jest": "^25.2.1",
-    "firebase-admin": "^9.1.1",
+    "firebase-admin": "^11.4.1",
     "jest": "^25.5.3",
     "ts-jest": "^25.4.0",
     "ts-node": "^8.9.1",
